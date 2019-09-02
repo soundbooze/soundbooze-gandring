@@ -8,6 +8,12 @@ Guitar And Ring Buffer
 
 ![alt text](https://raw.githubusercontent.com/soundbooze/soundbooze-gandring/master/logo.png)
 
+### Gears
+
+- Stranough Invader 7 (custom-built guitar with embedded Raspberry PI)
+- Peavey Bandit 112
+- Scarlett 2i2
+
 ## References:
 
 - https://2019.gnome.asia/
