@@ -8,6 +8,11 @@ Guitar And Ring Buffer
 
 ![alt text](https://raw.githubusercontent.com/soundbooze/soundbooze-gandring/master/logo.png)
 
+### Topics
+
+- Signal & Image Processing
+- Deep Learning
+
 ### Gears
 
 - Stranough Invader 7 (custom-built guitar with embedded Raspberry PI)
