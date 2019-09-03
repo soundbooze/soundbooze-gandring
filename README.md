@@ -10,7 +10,7 @@ Guitar And Ring Buffer
 
 ### Topics
 
-- Signal & Image Processing
+- Digital Signal & Image Processing
 - Deep Learning for Music Information Retrieval
 
 ### Gears
