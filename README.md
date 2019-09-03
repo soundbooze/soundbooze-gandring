@@ -5,7 +5,7 @@ Guitar And Ring Buffer
 ### GNOME Asia Summit 2019
 
 - <b>Hananto Herlambang</b> Presenting Talk for Standard session (12 - 13 October 2019)
-[Abstract](https://github.com/soundbooze/soundbooze-gandring/blob/master/abstrak.pdf)
+- [Abstract](https://github.com/soundbooze/soundbooze-gandring/blob/master/abstrak.pdf)
 
 ![alt text](https://raw.githubusercontent.com/soundbooze/soundbooze-gandring/master/logo.png)
 
