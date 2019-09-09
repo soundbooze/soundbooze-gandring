@@ -24,6 +24,7 @@ HEIGHT      = 1080
 BORDER      = 22
 
 ICON        = "/usr/share/pixmaps/jack-keyboard.png"
+FACECASCADE = "haarcascades/haarcascade_frontalface_default.xml"
 
 guitar      = None
 system      = None
@@ -155,6 +156,7 @@ class GandRing(gtk.Window):
         super(GandRing, self).__init__()
 
         self.cap = cv2.VideoCapture(0)
+        self.face_cascade = cv2.CascadeClassifier(FACECASCADE)
 
         self.set_title("G And Ring")
         self.connect("destroy", self.on_destroy)
@@ -294,6 +296,20 @@ class GandRing(gtk.Window):
         cr.set_source_surface(ims, WIDTH/2 - w/2, HEIGHT/2 - h/2)
 
         cr.paint()
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = self.face_cascade.detectMultiScale(gray, 1.3, 5)
+
+        for (fx,fy,fw,fh) in faces:
+            cr.set_font_size(22)
+            cr.set_source_rgb(0.39, 0.39, 0.39)
+            cr.move_to(640, 280)
+            cr.show_text("(" + "% d" % fx + "% d" % fy + ")")
+
+            cr.set_source_rgb(1.0, 0.0, 0.0)
+            cr.set_line_width(3.0)
+            cr.rectangle((WIDTH/2 - (w+16)/2)+fx, (HEIGHT/2 - (h+16)/2)+fy, fw, fh)
+            cr.stroke()
 
         if self.prevframe is not None:
             ssim = self._similar(self.prevframe, thresh)
