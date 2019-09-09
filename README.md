@@ -20,6 +20,10 @@ Guitar And Ring Buffer
 - Peavey Bandit 112
 - Scarlett 2i2
 
+### Haar-cascade Dataset
+
+- https://github.com/opencv/opencv/tree/master/data/haarcascades 
+
 ## References:
 
 - https://2019.gnome.asia/
