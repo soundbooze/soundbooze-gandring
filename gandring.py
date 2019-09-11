@@ -48,7 +48,7 @@ def db(rms):
 def rms(y):
     rms = 0;
     for i in y:
-      rms += numpy.power(i, 2);
+      rms += i * i #numpy.power(i, 2);
     rms = rms / len(y);
     rms = numpy.sqrt(rms);
     return rms
@@ -56,7 +56,7 @@ def rms(y):
 def energy(y):
     energy = 0;
     for i in y:
-      energy += numpy.power(i, 2);
+      energy += i * i #numpy.power(i, 2);
     return energy
 
 @client.set_process_callback
