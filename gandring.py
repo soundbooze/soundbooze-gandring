@@ -7,6 +7,7 @@ import cv2
 import os
 import sys
 import jack
+import vamp
 import numpy
 import psutil
 import signal
@@ -35,6 +36,7 @@ rg, eg, dg  = 0, 0, 0
 rs, es, ds  = 0, 0, 0
 
 currentTempo, tempoGram, predictTempo = 0, None, 0
+chords      = ""
 
 # --- JACK Thread ---
 
@@ -125,6 +127,7 @@ class RingBuffer:
 def FeatureThread():
 
     global currentTempo, tempoGram, predictTempo
+    global chords
 
     rb = RingBuffer(8)
 
@@ -139,6 +142,16 @@ def FeatureThread():
         unique, counts = numpy.unique(tempogram, return_counts=True)
         max_unique_counts = numpy.asarray((unique, counts)).T
         currentTempo, tempoGram, predictTempo = tempo[0], rb.get(), max_unique_counts[0][0]
+
+        vdata = vamp.collect(y, client.samplerate, "nnls-chroma:chordino")
+
+        idx = 0
+        for i in vdata['list']:
+            c = vdata['list'][idx]['label']
+            if c != 'N':
+                chords = c
+            idx = idx + 1
+
         os.system('rm -f out.wav')
 
         if stopThreads:
@@ -262,6 +275,8 @@ class GandRing(gtk.Window):
 
     def _feature(self, cr):
         global currentTempo, tempoGram, predictTempo
+        global chords
+
         cr.select_font_face("Courier", cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         cr.set_font_size(18)
         cr.set_source_rgb(0.39, 0.39, 0.39)
@@ -273,6 +288,10 @@ class GandRing(gtk.Window):
         cr.show_text(tg)
         cr.move_to(70, 250)
         cr.show_text("C: " + "% 0.2f" % currentTempo + " P: " + "% 0.2f" % predictTempo + " BPM")
+
+        cr.move_to(70, 290)
+        cr.set_font_size(32)
+        cr.show_text(chords)
 
     def _from_pil(self, im, alpha=1.0, format=cairo.FORMAT_ARGB32):
         assert format in (cairo.FORMAT_RGB24, cairo.FORMAT_ARGB32), "Unsupported pixel format: %s" % format
